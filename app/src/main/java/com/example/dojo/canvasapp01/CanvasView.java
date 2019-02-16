@@ -4,15 +4,18 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.view.View;
 
 public class CanvasView extends View {
     private Paint paint;
+    private Path path;
 
     public CanvasView(Context context){
         super(context);
 
         paint = new Paint();
+        path = new Path();
     }
 
     @Override
@@ -39,7 +42,18 @@ public class CanvasView extends View {
         paint.setColor(Color.YELLOW);
         paint.setStrokeWidth(40);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        canvas.drawLine(0,0,sx - 20,sy - 300,paint);
+        canvas.drawLine(0,100,sx - 20,sy - 300,paint);
+
+        //三角を描く（パスを使う）
+        paint.setColor(Color.MAGENTA);
+        paint.setStrokeWidth(20);
+
+        path.moveTo(500,600);
+        path.lineTo(700,1200);
+        path.lineTo(300,1200);
+        path.lineTo(500,600);
+
+        canvas.drawPath(path,paint);
 
     }
 
